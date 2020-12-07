@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+
+// Define the main class for the application
+mainClassName = 'Fruit.machine.Main'
