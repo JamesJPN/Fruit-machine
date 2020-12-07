@@ -1,5 +1,4 @@
-package fruitMachine;
-
+package Fruit.machine;
 
 import java.util.HashMap;
 import java.util.Map;
