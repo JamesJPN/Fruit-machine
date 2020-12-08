@@ -18,6 +18,14 @@ class FruitMachineGameTest {
         testObject = new FruitMachineGame();
     }
 
+    /**
+     * tests follow the same format
+     * - given (some preconditions)
+     * - when (we call method x on testObject)
+     * - then (expect the following results)
+     * Tests state what we want to happen when each method
+     * is called with different inputs. Think: Input->Some Process->Output
+     */
     @Test
     void shouldReturnThreeSymbols_WhenThreeSymbolsAreProvided() {
         // given
