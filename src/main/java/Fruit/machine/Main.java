@@ -12,98 +12,66 @@ import java.util.Random;
 
 public class Main {
 
-    private static final String CHERRY = "cherry";
-    private static final String ORANGE = "orange";
-    private static final String LEMON = "lemon";
-    private static final String BELL = "bell";
-    private static final String STAR = "star";
-    private static final String SKULL = "skull";
     private static final Random random = new Random();
     private static final double credit = 1.00;
+    public static final int NUMBER_OF_REELS = 3;
 
-    double cost = 0.20;
-    double twoSymWin = 0.50;
-    double threeSymWin = 1.00;
+    double costToPlay = 0.20;
+    double twoSymbolWin = 0.50;
+    double threeSymbolWin = 1.00;
     double threeBellWin = 5.00;
     double twoSkullLoss = -1.00;
 
     public static void main(String[] args) {
-        String[] symbols = new String[3];
-        pickRandomSymbolsForReels(symbols);
-        displayReels(symbols);
-        Map<String, Integer> symbolCounts = new HashMap<>();
-        checkResults(symbols, symbolCounts);
+        Symbol[] reelSymbols = pickRandomSymbolsForReels(new Symbol[NUMBER_OF_REELS]);
+        displayReels(reelSymbols);
+        Map<Symbol, Integer> symbolCounts = new HashMap<>();
+        getResults(reelSymbols, symbolCounts);
         displayResults(symbolCounts);
     }
 
 
-    private static void checkResults(String[] symbols, Map<String, Integer> symbolCounts) {
+    private static void getResults(Symbol[] symbols, Map<Symbol, Integer> symbolCounts) {
         // for each symbol
-       
-        if (symbolCounts.get(CHERRY) == null) {
-            symbolCounts.put(CHERRY, 1);
-        } else {
-            int incrementedValue = symbolCounts.get(CHERRY) + 1;
-            symbolCounts.put(CHERRY, incrementedValue);
-        }
-        if (symbolCounts.get(ORANGE) == null) {
-            symbolCounts.put(ORANGE, 2);
-        } else {
-            int incrementedValue = symbolCounts.get(ORANGE) + 1;
-            symbolCounts.put(ORANGE, incrementedValue);
-        }
-        if (symbolCounts.get(LEMON) == null) {
-            symbolCounts.put(LEMON, 3);
-        } else {
-            int incrementedValue = symbolCounts.get(LEMON) + 1;
-            symbolCounts.put(LEMON, incrementedValue);
-        }
-        if (symbolCounts.get(BELL) == null) {
-            symbolCounts.put(BELL, 4);
-        } else {
-            int incrementedValue = symbolCounts.get(BELL) + 1;
-            symbolCounts.put(BELL, incrementedValue);
-        }
-        if (symbolCounts.get(STAR) == null) {
-            symbolCounts.put(STAR, 5);
-        } else {
-            int incrementedValue = symbolCounts.get(STAR) + 1;
-            symbolCounts.put(STAR, incrementedValue);
-        }
-        if (symbolCounts.get(SKULL) == null) {
-            symbolCounts.put(SKULL, 6);
-        } else {
-            int incrementedValue = symbolCounts.get(SKULL) + 1;
-            symbolCounts.put(SKULL, incrementedValue);
+        for (Symbol symbol : symbols) {
+            incrementSymbolCounter(symbol, symbolCounts);
         }
     }
 
+    private static void incrementSymbolCounter(Symbol symbol, Map<Symbol, Integer> symbolCounts) {
+        if (symbolCounts.get(symbol) == null) {
+            symbolCounts.put(symbol, 1);
+        } else {
+            int incrementedValue = symbolCounts.get(symbol) + 1;
+            symbolCounts.put(symbol, incrementedValue);
+        }
+    }
 
-    private static String[] pickRandomSymbolsForReels(String[] symbols) {
+    private static Symbol[] pickRandomSymbolsForReels(Symbol[] symbols) {
 
         for (int reelIndex = 0; reelIndex < symbols.length; reelIndex++) {
             int choice = random.nextInt(6);
             switch (choice) {
-                case 0 -> symbols[reelIndex] = CHERRY;
-                case 1 -> symbols[reelIndex] = ORANGE;
-                case 2 -> symbols[reelIndex] = LEMON;
-                case 3 -> symbols[reelIndex] = BELL;
-                case 4 -> symbols[reelIndex] = STAR;
-                case 5 -> symbols[reelIndex] = SKULL;
+                case 0 -> symbols[reelIndex] = Symbol.CHERRY;
+                case 1 -> symbols[reelIndex] = Symbol.ORANGE;
+                case 2 -> symbols[reelIndex] = Symbol.LEMON;
+                case 3 -> symbols[reelIndex] = Symbol.BELL;
+                case 4 -> symbols[reelIndex] = Symbol.STAR;
+                case 5 -> symbols[reelIndex] = Symbol.SKULL;
             }
         }
 
         return symbols;
     }
 
-    private static void displayReels(String[] symbols) {
-        for (String symbol : symbols) {
+    private static void displayReels(Symbol[] symbols) {
+        for (Symbol symbol : symbols) {
             System.out.print(symbol + " ");
         }
         System.out.println();
     }
 
-    private static void displayResults(Map<String, Integer> symbolCounts) {
+    private static void displayResults(Map<Symbol, Integer> symbolCounts) {
         /**
          * Here you'll need to understand the logic of various events.
          * e.g
