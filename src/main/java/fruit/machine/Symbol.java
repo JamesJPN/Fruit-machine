@@ -1,4 +1,4 @@
-package Fruit.machine;
+package fruit.machine;
 
 /**
  * Enum is a 'type' in Java. Using a type rather than "String" adds better

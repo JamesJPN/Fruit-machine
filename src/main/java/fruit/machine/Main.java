@@ -1,4 +1,4 @@
-package Fruit.machine;
+package fruit.machine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,6 @@ public class Main {
         displayResults(symbolCounts);
     }
 
-
     private static void getResults(Symbol[] symbols, Map<Symbol, Integer> symbolCounts) {
         // for each symbol
         for (Symbol symbol : symbols) {
@@ -48,7 +47,6 @@ public class Main {
     }
 
     private static Symbol[] pickRandomSymbolsForReels(Symbol[] symbols) {
-
         for (int reelIndex = 0; reelIndex < symbols.length; reelIndex++) {
             int choice = random.nextInt(6);
             switch (choice) {
@@ -60,7 +58,6 @@ public class Main {
                 case 5 -> symbols[reelIndex] = Symbol.SKULL;
             }
         }
-
         return symbols;
     }
 
@@ -88,5 +85,4 @@ public class Main {
         //   decreaseBalance(100) // note when working with money, store pence amount only and display the value as pounds and pence.. otherwise you'll have issues
         // } etc ..
     }
-
 }
