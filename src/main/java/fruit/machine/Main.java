@@ -2,7 +2,8 @@ package fruit.machine;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+
+import static fruit.machine.FruitMachineGame.NUMBER_OF_REELS;
 
 //The player starts with £1 credit, with each go costing 20 p.
 //If the Fruit Machine “rolls” two of the same symbol, the user wins 50 p.
@@ -14,6 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
         FruitMachineGame game = new FruitMachineGame();
+        Symbol[] reelSymbols = game.pickRandomSymbolsForReels(new Symbol[NUMBER_OF_REELS]);
+        game.displayReels(reelSymbols);
+        Map<Symbol, Integer> symbolCounts = game.getResults(reelSymbols, new HashMap<>());
+        game.displayResults(symbolCounts);
     }
-
 }

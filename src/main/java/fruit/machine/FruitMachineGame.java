@@ -1,14 +1,13 @@
 package fruit.machine;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class FruitMachineGame {
 
+    protected static final int NUMBER_OF_REELS = 3;
     private static final Random random = new Random();
     private static final int credit = 100;
-    private static final int NUMBER_OF_REELS = 3;
 
     // Monetary values should be integers - when displaying them format them as dollars and cents.
     // using double for money will result in very strange results due to computational inaccuracy.
@@ -18,22 +17,17 @@ public class FruitMachineGame {
     private static final int threeBellWin = 500;
     private static final int twoSkullLoss = -100;
 
-    public FruitMachineGame() {
-        Symbol[] reelSymbols = pickRandomSymbolsForReels(new Symbol[NUMBER_OF_REELS]);
-        displayReels(reelSymbols);
-        Map<Symbol, Integer> symbolCounts = new HashMap<>();
-        getResults(reelSymbols, symbolCounts);
-        displayResults(symbolCounts);
-    }
+    public FruitMachineGame() { }
 
-    private void getResults(Symbol[] symbols, Map<Symbol, Integer> symbolCounts) {
+    public Map<Symbol, Integer> getResults(Symbol[] symbols, Map<Symbol, Integer> symbolCounts) {
         // for each symbol
         for (Symbol symbol : symbols) {
-            incrementSymbolCounter(symbol, symbolCounts);
+            incrementSymbolCounters(symbol, symbolCounts);
         }
+        return symbolCounts;
     }
 
-    private void incrementSymbolCounter(Symbol symbol, Map<Symbol, Integer> symbolCounts) {
+    private void incrementSymbolCounters(Symbol symbol, Map<Symbol, Integer> symbolCounts) {
         if (symbolCounts.get(symbol) == null) {
             symbolCounts.put(symbol, 1);
         } else {
@@ -42,7 +36,7 @@ public class FruitMachineGame {
         }
     }
 
-    private Symbol[] pickRandomSymbolsForReels(Symbol[] symbols) {
+    public Symbol[] pickRandomSymbolsForReels(Symbol[] symbols) {
         for (int reelIndex = 0; reelIndex < symbols.length; reelIndex++) {
             int choice = random.nextInt(6);
             switch (choice) {
@@ -57,14 +51,19 @@ public class FruitMachineGame {
         return symbols;
     }
 
-    private void displayReels(Symbol[] symbols) {
-        for (Symbol symbol : symbols) {
-            System.out.print(symbol + " ");
-        }
-        System.out.println();
+    public void displayReels(Symbol[] symbols) {
+        System.out.println(getGameResult(symbols));
     }
 
-    private void displayResults(Map<Symbol, Integer> symbolCounts) {
+    public String getGameResult(Symbol[] symbols) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Symbol symbol : symbols) {
+            stringBuilder.append(symbol + " ");
+        }
+        return stringBuilder.toString();
+    }
+
+    public void displayResults(Map<Symbol, Integer> symbolCounts) {
         /**
          * Here you'll need to understand the logic of various events.
          * e.g
